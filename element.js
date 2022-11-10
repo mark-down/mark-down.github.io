@@ -1,37 +1,42 @@
 customElements.define(
   "mark-down",
   class extends HTMLElement {
-    connectedCallback(e = 0, i = (e) => "<li>" + e + "</li>") {
+    connectedCallback() {
       setTimeout(
         () =>
-          (this.innerHTML = this.innerHTML
-            .replace(/\s\s\n/gim, "\n<br>\n")
-            .replace(/\n\n/gim, "\n<br>\n")
-            .split("\n")
-            .map((e) => e.trim())
-            .join("\n")
-            .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
-            .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-            .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-            .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-            .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
-            .replace(/\_\_(.*)\_\_/gim, "<b>$1</b>")
-            .replace(/\*(.*)\*/gim, "<i>$1</i>")
-            .replace(/\_(.*)\_/gim, "<i>$1</i>")
-            .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2'>")
-            .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-            .split(/\n\* /)
-            .reduce((n, l, r) => {
-              if (e && l.includes("\n")) {
-                let [n, ...r] = l.split("\n");
-                l = [i(n), "</ul>", ...r].join("\n");
-                e = 0;
-              } else (e || (r && (e = n.push("<ul>")))) && (l = i(l));
-              n.push(l);
-              return n;
-            }, [])
-            .join("\n")
-            .concat(e ? "</ul>" : "\n"))
+          (this.innerHTML = [
+            //header rules
+            [/#{6}\s?([^\n]+)/g, "<h6>$1</h6>"],
+            [/#{5}\s?([^\n]+)/g, "<h5>$1</h5>"],
+            [/#{4}\s?([^\n]+)/g, "<h4>$1</h4>"],
+            [/#{3}\s?([^\n]+)/g, "<h3>$1</h3>"],
+            [/#{2}\s?([^\n]+)/g, "<h2>$1</h2>"],
+            [/#{1}\s?([^\n]+)/g, "<h1>$1</h1>"],
+            //bold, italics and paragragh rules
+            [/\*\*\s?([^\n]+)\*\*/g, "<b>$1</b>"],
+            [/\*\s?([^\n]+)\*/g, "<i>$1</i>"],
+            [/__([^_]+)__/g, "<b>$1</b>"],
+            [/_([^_`]+)_/g, "<i>$1</i>"],
+            [/([^\n]+\n?)/g, "<p>$1</p>"],
+            //links
+            [/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>'],
+            //highlights
+            [
+              /(`)(\s?[^\n,]+\s?)(`)/g,
+              '<a style="background:grey;color:black;text-decoration:none;border-radius:3px;padding:0 2px;">$2</a>',
+            ],
+            //Lists
+            [/([^\n]+)(\+)([^\n]+)/g, "<ul><li>$3</li></ul>"],
+            [/([^\n]+)(\*)([^\n]+)/g, "<ul><li>$3</li></ul>"],
+            //Image
+            [
+              /!\[([^\]]+)\]\(([^)]+)\s"([^")]+)"\)/g,
+              '<img src="$2" alt="$1" title="$3">',
+            ],
+          ].reduce(
+            (html, rule) => (html = html.replace(...rule) || html),
+            this.innerHTML
+          ))
       );
     }
   }
