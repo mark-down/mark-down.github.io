@@ -43,11 +43,11 @@ customElements.define(
               this.innerHTML
             )
             // process ``` backticks
-            .split("```")
-            .map((html, idx) => {
-              if (i % 2) {
-              }
-            }).join("")
+            // .split("```")
+            // .map((html, idx) => {
+            //   if (i % 2) {
+            //   }
+            // }).join("")
             // process backticks
             .split("") //split by character
             .reduce((txt, chr) => {
