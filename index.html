@@ -1,37 +1,54 @@
 <script src="element.js"></script>
 <script src="https://file-size.github.io/element.js"></script>
 <style>
-    body{
-        font:16px sans-serif;
+    body {
+        font: 16px sans-serif;
+    }
+
+    main {
+        max-width: 48em;
+        background: beige;
+        margin: 0 auto;
+        padding: 1em;
     }
 </style>
+<main>
 
-<mark-down>
-    # parsing Mark Down syntax
+    <mark-down>
+        # parsing Mark Down syntax
+        ## with the &lt;mark-down> Web Component
+        #### Usage/Load the Web Component
+        
+        ```
+        &lt;script src="https://mark-down.github.io/element/min.js">&lt;/script>
+        
+        &lt;mark-down>Hello **Web Component**&lt;/mark-down>
+        (also see this document source)
+        ```
 
-    ### There *are* Components available that parse **markdown**:
+        ### There *are* Components available that parse **markdown**:
 
-    * [&lt;zero-md>](https://zerodevx.github.io/zero-md/) _'zero' config, **not** zero dependencies_
+        * [&lt;zero-md>](https://zerodevx.github.io/zero-md/) _'zero' config, **not** zero dependencies_
+        * [&lt;wc-markdown>](https://github.com/vanillawc/wc-markdown)
+        #### They look tiny:
+        </mark-down>
 
-    * [&lt;wc-markdown>](https://github.com/vanillawc/wc-markdown)
-    #### They look tiny:
-</mark-down>
+    <file-size src="https://mark-down.github.io/others_zero-md.min.js"></file-size>
+    <file-size src="https://mark-down.github.io/others_wc-markdown.min.js"></file-size>
 
-<file-size src="https://mark-down.github.io/others_zero-md.min.js"></file-size>
-<file-size src="https://mark-down.github.io/others_wc-markdown.min.js"></file-size>
+    <mark-down style="color:red">
+        ### _But_ above sizes are _deceptive_, **both** load the MarkedJS library:
+    </mark-down>
 
-<mark-down style="color:red">
-    ### _But_ above sizes are _deceptive_, **both** load the MarkedJS library:
-</mark-down>
+    <file-size src="https://mark-down.github.io/others_marked.min.js"></file-size>
 
-<file-size src="https://mark-down.github.io/others_marked.min.js"></file-size>
-
-<mark-down>
-    #### 12 KiloBytes is a bit much for parsing *basic* Markdown
-    * So I copied a _basic_ parser from [a blog](https://betterprogramming.pub/create-your-own-markdown-parser-bffb392a06db)
-    * cleaned its custom styling
-    * optimized it for a balance between `file-size` and `speed`
-    * It ain't as fancy as MarkedJS, but it does the job for me
-    * the GZipped size loading [https://mark-down.github.io/element.min.js](https://mark-down.github.io/element.min.js) is:
-</mark-down>
-<file-size gz src="https://mark-down.github.io/element.min.js"></file-size>
+    <mark-down>
+        #### 12 KiloBytes is a bit much for parsing *basic* Markdown
+        * So I copied a _basic_ parser from a [blog](https://betterprogramming.pub/create-your-own-markdown-parser-bffb392a06db)
+        * cleaned its custom styling
+        * optimized it for a balance between `file-size` and `speed`
+        * It ain't as fancy as MarkedJS, but it does the job for me
+        #### The result is a [529 Bytes minified file](https://mark-down.github.io/element.min.js):
+        </mark-down>
+        <file-size gz src="https://mark-down.github.io/element.min.js"></file-size>
+</main>
