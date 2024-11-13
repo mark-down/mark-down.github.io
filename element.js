@@ -5,7 +5,7 @@ customElements.define(
       // declare markdown function as parameter to save LET declaration
       markdown = (str) => {
         // ===== Extract ``` code blocks and replace with placeholders
-        let counter = 0,
+        let counter = 1, // 0 is 1 more byte in minified code
           id,
           codes = {};
         str = str.replace(/```([\s\S]+?)```/g, (match, code) => {
@@ -26,8 +26,8 @@ customElements.define(
           (html, id) => html.replace(id, codes[id]),
           // --------------------------------------- process other Markdown tags
           [
-            [/#{6}\s?([^\n]+)/g, "<h6>$1</h6>"], // headers from # to ######
-            [/#{5}\s?([^\n]+)/g, "<h5>$1</h5>"],
+            //[/#{6}\s?([^\n]+)/g, "<h6>$1</h6>"],
+            [/#{5}\s?([^\n]+)/g, "<h5>$1</h5>"], // headers from # to ######
             [/#{4}\s?([^\n]+)/g, "<h4>$1</h4>"],
             [/#{3}\s?([^\n]+)/g, "<h3>$1</h3>"],
             [/#{2}\s?([^\n]+)/g, "<h2>$1</h2>"],
