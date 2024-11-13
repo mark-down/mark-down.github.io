@@ -16,7 +16,7 @@
 
     <mark-down>
         # parsing Mark Down syntax
-        ## with the &lt;mark-down> Web Component
+        ## with the &lt;mark-down> Web Component - [GitHub](https://github.com/mark-down/mark-down.github.io)
         #### Usage/Load the Web Component
         
         ```
@@ -53,4 +53,30 @@
         #### The result is a [529 Bytes minified file](https://mark-down.github.io/element.min.js):
         </mark-down>
         <file-size gz src="https://mark-down.github.io/element.min.js"></file-size>
+    <h2>Markdown example</h2>
+    <section>
+        <mark-down>
+            # Only **basic** Markdown supported
+            # H1
+            ## H2
+            ### H3
+            #### H4
+            ##### H5
+            ###### H6
+            * Lists with ```*``` or +
+            * **Bold** and _Italics_
+            ```
+            **bold** or _italics_
+            __bold__ or *italics*
+            _**bold and italics**_
+            ```
+            * Hyperlinks: [GitHub source](https://github.com/swot-text/swot-text.github.io/)
+            * Images
+            ![FOO](https://via.placeholder.com/50 "FOO")
+            * code blocks between triple backticks
+            # Not supported:
+            * Tables, blockquotes
+        </mark-down>
+    </section>
+
 </main>
