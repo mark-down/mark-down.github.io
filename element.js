@@ -15,7 +15,7 @@ customElements.define(
             code
               .split("\n")
               .map((l) => l.trim())
-              .filter(Boolean)
+              .filter((l) => !!l) // .filter(Boolean) is worse for GZIP size
               .join("\n") +
             "</code></pre>";
           // ------------------------------------- return placeholder to input str
@@ -27,7 +27,7 @@ customElements.define(
           // --------------------------------------- process other Markdown tags
           [
             //[/#{6}\s?([^\n]+)/g, "<h6>$1</h6>"],
-            [/#{5}\s?([^\n]+)/g, "<h5>$1</h5>"], // headers from # to ######
+            //[/#{5}\s?([^\n]+)/g, "<h5>$1</h5>"], // headers from # to ######
             [/#{4}\s?([^\n]+)/g, "<h4>$1</h4>"],
             [/#{3}\s?([^\n]+)/g, "<h3>$1</h3>"],
             [/#{2}\s?([^\n]+)/g, "<h2>$1</h2>"],
