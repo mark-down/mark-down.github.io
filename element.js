@@ -2,25 +2,31 @@ customElements.define(
   "mark-down",
   class extends HTMLElement {
     connectedCallback(
-      // declare markdown function as parameter to save LET declaration
-      markdown = (str) => {
+      // declare as parameters to save LET/CONST declaration
+      markdown = (
+        // declare as parameters to save LET declaration
+        str,
+        counter = 1, // 0 is 1 more byte in minified code
+        id,
+        codes = {}
+      ) => {
         // ===== Extract ``` code blocks and replace with placeholders
-        let counter = 1, // 0 is 1 more byte in minified code
-          id,
-          codes = {};
-        str = str.replace(/```([\s\S]+?)```/g, (match, code) => {
-          codes[(id = "precode" + counter++)] =
-            "<pre><code>" +
-            // ------------------------------------- trim whitespace and empty lines from codeline
-            code
-              .split("\n")
-              .map((l) => l.trim())
-              .filter((l) => !!l) // .filter(Boolean) is worse for GZIP size
-              .join("\n") +
-            "</code></pre>";
-          // ------------------------------------- return placeholder to input str
-          return id;
-        });
+        str = str.replace(
+          /```([\s\S]+?)```/g,
+          (match, code) => (
+            (codes[(id = "pc" + counter++)] =
+              "<pre><code>" +
+              // ------------------------------------- trim whitespace and empty lines from codeline
+              code
+                .split("\n")
+                .map((l) => l.trim())
+                .filter((l) => !!l) // .filter(Boolean) is worse for GZIP size
+                .join("\n") +
+              "</code></pre>"),
+            // ------------------------------------- return placeholder to input str
+            /*return*/ id
+          )
+        );
         // process this.innerHTML with Markdown tags
         return Object.keys(codes).reduce(
           (html, id) => html.replace(id, codes[id]),
