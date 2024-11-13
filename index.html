@@ -11,50 +11,61 @@
         margin: 0 auto;
         padding: 1em;
     }
+
+    section:not([id="example"]) {
+        /* display: none */
+    }
 </style>
 <main>
+    <section id="blog">
 
-    <mark-down>
-        # parsing Mark Down syntax
-        ## with the &lt;mark-down> Web Component - [GitHub](https://github.com/mark-down/mark-down.github.io)
-        #### Usage/Load the Web Component
+        <mark-down>
+            # parsing Mark Down syntax
+            ## with the &lt;mark-down> Web Component - [GitHub](https://github.com/mark-down/mark-down.github.io)
+            #### Usage/Load the Web Component
         
-        ```
-        &lt;script src="https://mark-down.github.io/element.min.js">&lt;/script>
-        ```
+            ```
+            &lt;script src="https://mark-down.github.io/element.min.js">&lt;/script>
+            ```
         
-        ```
-        &lt;mark-down>Hello **Web Component**&lt;/mark-down>
-        (also see this document source)
-        ```
+            ```
+            &lt;mark-down>Hello **Web Component**&lt;/mark-down>
+            (also see this document source)
+            ```
 
-        ### There *are* Components available that parse **markdown**:
+            ### There *are* Components available that parse **markdown**:
 
-        * [&lt;zero-md>](https://zerodevx.github.io/zero-md/) _'zero' config, **not** zero dependencies_
-        * [&lt;wc-markdown>](https://github.com/vanillawc/wc-markdown)
-        #### They look tiny:
+            * [&lt;zero-md>](https://zerodevx.github.io/zero-md/) _'zero' config, **not** zero dependencies_
+            * [&lt;wc-markdown>](https://github.com/vanillawc/wc-markdown)
+            #### They look tiny:
         </mark-down>
 
-    <file-size src="https://mark-down.github.io/others_zero-md.min.js"></file-size>
-    <file-size src="https://mark-down.github.io/others_wc-markdown.min.js"></file-size>
+        <file-size src="https://mark-down.github.io/others_zero-md.min.js"></file-size>
+        <file-size src="https://mark-down.github.io/others_wc-markdown.min.js"></file-size>
 
-    <mark-down style="color:red">
-        ### _But_ above sizes are _deceptive_, **both** load the MarkedJS library:
-    </mark-down>
-
-    <file-size src="https://mark-down.github.io/others_marked.min.js"></file-size>
-
-    <mark-down>
-        #### 12 KiloBytes is a bit much for parsing *basic* Markdown
-        * So I copied a _basic_ parser from a [blog](https://betterprogramming.pub/create-your-own-markdown-parser-bffb392a06db)
-        * cleaned its custom styling
-        * optimized it for a balance between `file-size` and `speed`
-        * It ain't as fancy as MarkedJS, but it does the job for me
-        #### The result is a [529 Bytes minified file](https://mark-down.github.io/element.min.js):
+        <mark-down style="color:red">
+            ### _But_ above sizes are _deceptive_, **both** load the MarkedJS library:
         </mark-down>
+
+        <file-size src="https://mark-down.github.io/others_marked.min.js"></file-size>
+
+        <mark-down>
+            #### 12 KiloBytes is a bit much for parsing *basic* Markdown
+            * So I copied a _basic_ parser from a
+            [blog](https://betterprogramming.pub/create-your-own-markdown-parser-bffb392a06db)
+            * cleaned its custom styling
+            * optimized it for a balance between `file-size` and `speed`
+            * It ain't as fancy as MarkedJS, but it does the job for me
+            #### The result is a [529 Bytes minified file](https://mark-down.github.io/element.min.js):
+        </mark-down>
+    </section>
+    
+    <section id="file-size">
         <file-size gz src="https://mark-down.github.io/element.min.js"></file-size>
+    </section>
+
     <h2>Markdown example</h2>
-    <section>
+    <section id="example">
         <mark-down>
             # Only **basic** Markdown supported
             # H1
@@ -72,8 +83,8 @@
             ```
             * Hyperlinks: [GitHub source](https://github.com/swot-text/swot-text.github.io/)
             * Images
-            ![FOO](https://via.placeholder.com/50 "FOO")
-            * code blocks between triple backticks
+            ![FOO](https://via.placeholder.com/100 "alt FOO")
+            * escape code blocks between triple backticks ```
             # Not supported:
             * Tables, blockquotes
         </mark-down>
