@@ -17,7 +17,7 @@
     }
 </style>
 <main>
-    <section id="blog">
+    <section id="blog" hidde>
 
         <mark-down>
             # parsing Mark Down syntax
@@ -73,16 +73,16 @@
             #### H4
             H5 and H6 removed for brevity
 
-            * Lists with ```*``` or +
-            * **Bold** and _Italics_
+            * Lists with <code>*</code> or +
+            * **Bold** and _Italics_ and **bold**
             ```
             **bold** or _italics_
             __bold__ or *italics*
             _**bold and italics**_
             ```
             * Hyperlinks: [&lt;mark-down> GitHub source](https://github.com/mark-down/mark-down.github.io/blob/main/element.js)
-            * Images
-            ![FOO](https://via.placeholder.com/100 "alt FOO")
+            * Images (must have alt text)
+            ![FOO](https://placehold.co/80 "alt FOO")
             * escape code blocks between triple backticks ```
             # Not supported:
             * Tables, blockquotes

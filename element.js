@@ -10,13 +10,13 @@ customElements.define(
         id,
         codes = {}
       ) => {
-        // ===== Extract ``` code blocks and replace with placeholders
+        // ================================================ Extract ``` code blocks and replace with placeholders
         str = str.replace(
           /```([\s\S]+?)```/g,
-          (match, code) => (
+          (_, code) => (
             (codes[(id = "pc" + counter++)] =
               "<pre><code>" +
-              // ------------------------------------- trim whitespace and empty lines from codeline
+            // ------------------------------------- trim whitespace and empty lines from code line
               code
                 .split("\n")
                 .map((l) => l.trim())
@@ -27,8 +27,8 @@ customElements.define(
             /*return*/ id
           )
         );
-        // process this.innerHTML with Markdown tags
-        return Object.keys(codes).reduce(
+        // ================================================ process this.innerHTML with Markdown tags
+        str = Object.keys(codes).reduce(
           (html, id) => html.replace(id, codes[id]),
           // --------------------------------------- process other Markdown tags
           [
@@ -38,13 +38,14 @@ customElements.define(
             [/#{3}\s?([^\n]+)/g, "<h3>$1</h3>"],
             [/#{2}\s?([^\n]+)/g, "<h2>$1</h2>"],
             [/#{1}\s?([^\n]+)/g, "<h1>$1</h1>"],
+
             // --------------------------------------- bold with double ** or __
-            [/\*\*\s?([^\n]+)\*\*/g, "<b>$1</b>"], // /\*\*(.+?)\*\*/g or /__(.+?)__/g
+            [/\*\*([^*]+)\*\*/g, "<b>$1</b>"], // /\*\*(.+?)\*\*/g or /__(.+?)__/g
             [/__([^_]+)__/g, "<b>$1</b>"],
             // --------------------------------------- italics with single * or _
             [/\*\s?([^\n]+)\*/g, "<i>$1</i>"], ///\*(.+?)\*/g or /_(.+?)_/g
             [/_([^_`]+)_/g, "<i>$1</i>"], //
-            [/```([\s\S]+?)```/g, "<code><pre>$1</pre></code>"],
+            // [/```([\s\S]+?)```/g, "<code><pre>$1</pre></code>"],
             // --------------------------------------- paragraphs from newline
             [/([^\n]+\n?)/g, "<p>$1</p>"],
             // --------------------------------------- UL Lists with + and *
@@ -57,9 +58,11 @@ customElements.define(
             ],
             // --------------------------------------- A HREF Links
             [/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>'], // /\[(.+?)\]\((.+?)\)/g
-            // --------------------------------------- Process regexs, built HTML str
+            // --------------------------------------- Process regexes, build HTML str
           ].reduce((html, rgx) => html.replace(...rgx), str)
         );
+        // ================================================ return final HTML
+        return str
       }
     ) {
       // wait for lightDOM/innerHTML to be parsed
