@@ -38,8 +38,9 @@
             * [&lt;zero-md>](https://zerodevx.github.io/zero-md/) _'zero' config, **not** zero dependencies_
             * [&lt;wc-markdown>](https://github.com/vanillawc/wc-markdown)
             #### They look tiny:
-        </mark-down>
 
+        </mark-down>
+        
         <file-size src="https://mark-down.github.io/others_zero-md.min.js"></file-size>
         <file-size src="https://mark-down.github.io/others_wc-markdown.min.js"></file-size>
 
@@ -55,13 +56,13 @@
             * cleaned its custom styling
             * optimized it for a balance between `file-size` and `speed`
             * It ain't as fancy as MarkedJS, but it does the job for me
-            #### The result is a [½ KB minified file](https://mark-down.github.io/element.min.js):
+#### The result is a [½ KB minified file](https://mark-down.github.io/element.min.js): (click to open GZip analysis)
+<file-size nogz src="https://mark-down.github.io/element.min.js"></file-size>
         </mark-down>
     </section>
     
-    <section id="file-size">
-        <file-size gz src="https://mark-down.github.io/element.min.js"></file-size>
-    </section>
+    <!-- <section id="file-size">
+                </section> -->
 
     <h2>Markdown example</h2>
     <section id="example">
@@ -73,22 +74,28 @@
             #### H4
             H5 and H6 removed for brevity
 
-            # Lists
+            # &lt;ul> Lists
             * **Bold** and _Italics_ and **bold**
             * Hyperlinks: [&lt;mark-down> GitHub source](https://github.com/mark-down/mark-down.github.io/blob/main/element.js)
-            * Images (must have alt text)
-            ![FOO](https://placehold.co/80 "alt FOO")
-            * escape code blocks between triple backticks ```
+            * Images (must have alt text! title is optional) ```![FOO](https://placehold.co/80 "alt FOO")```
+            ![alt](https://placehold.co/80 "title")
+            
+            escape code blocks between **triple** backticks `
+            
+            * ```**bold** or _italics_```
+            * ```__bold__ or *italics*```
+            * ```_**bold and italics**_```
+            
+            **create:**
 
-            ```
-            **bold** or _italics_
-            __bold__ or *italics*
-            _**bold and italics**_
-            ```
+            * **bold** or _italics_
+            * __bold__ or *italics*
+            * _**bold and italics**_
 
             # Not supported:
             * Tables
             * Blockquotes
+            * Ordered Lists
         </mark-down>
     </section>
 
